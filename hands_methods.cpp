@@ -36,6 +36,10 @@ Mat greyscale(std::string filename){
 Mat resizeByHalf(std::string filename){
     int scale = 2;
     Mat RGBImage = imread(filename);
+    if (!RGBImage.data){
+        std::cerr << "Error! No such image exists by the path " << filename << std::endl;
+        exit(-1);
+    }
     Mat ResizedImage(RGBImage.size() / scale, CV_8UC3);
     int height = round(RGBImage.rows / scale);
     int width  = round(RGBImage.cols / scale) * 3;
@@ -51,6 +55,10 @@ Mat resizeByHalf(std::string filename){
 Mat resizeByTwice(std::string filename){
     int scale = 2;
     Mat RGBImage = imread(filename);
+    if (!RGBImage.data){
+        std::cerr << "Error! No such image exists by the path " << filename << std::endl;
+        exit(-1);
+    }
     Mat ResizedImage(RGBImage.size() * scale, CV_8UC3);
     int height = (RGBImage.rows * scale);
     int width  = (RGBImage.cols * scale) * 3;
