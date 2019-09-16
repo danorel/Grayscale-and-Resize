@@ -35,14 +35,14 @@ Mat greyscale(std::string filename){
 
 Mat resizeByHalf(std::string filename){
     int scale = 2;
-    Mat RGBImage = imread(filename);
+    Mat RGBImage = imread(filename, IMREAD_GRAYSCALE);
     if (!RGBImage.data){
         std::cerr << "Error! No such image exists by the path " << filename << std::endl;
         exit(-1);
     }
-    Mat ResizedImage(RGBImage.size() / scale, CV_8UC3);
+    Mat ResizedImage(RGBImage.size() / scale, CV_8UC1);
     int height = round(RGBImage.rows / scale);
-    int width  = round(RGBImage.cols / scale) * 3;
+    int width  = round(RGBImage.cols / scale);
     for (int row = 0; row < height; row++){
         for (int column = 0; column < width; column++){
             ResizedImage.at<uchar>(row, column) = RGBImage.at<uchar>(scale * row, scale * column);
@@ -54,14 +54,14 @@ Mat resizeByHalf(std::string filename){
 
 Mat resizeByTwice(std::string filename){
     int scale = 2;
-    Mat RGBImage = imread(filename);
+    Mat RGBImage = imread(filename, IMREAD_GRAYSCALE);
     if (!RGBImage.data){
         std::cerr << "Error! No such image exists by the path " << filename << std::endl;
         exit(-1);
     }
-    Mat ResizedImage(RGBImage.size() * scale, CV_8UC3);
+    Mat ResizedImage(RGBImage.size() * scale, CV_8UC1);
     int height = (RGBImage.rows * scale);
-    int width  = (RGBImage.cols * scale) * 3;
+    int width  = (RGBImage.cols * scale);
     for (int row = 0; row < height; row++){
         for (int column = 0; column < width; column++){
             ResizedImage.at<uchar>(row, column) = RGBImage.at<uchar>(round(row / scale), floor(column / scale));
